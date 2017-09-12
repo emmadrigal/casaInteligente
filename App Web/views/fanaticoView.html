@@ -1,0 +1,71 @@
+<div ng-controller="fanaticoController">
+
+   <div class="form">
+                    <h1 style="color:#ffffff" >Smart House</h1>  
+                    <hr>
+                    <ul class="tab-group">
+                        <li class="tab active"><a href="#signup" >Control</a></li>
+                        <li class="tab"><a href="#login" >Pictures</a></li>
+                    </ul>
+                    <div class="tab-content">
+                                <div id="signup">   
+                                  <h1 style="color:#ffffff">Your House</h1>
+                                  <form>
+                                      
+                                      <!-- 
+                                                                            <td><div class="col-xs-3"><input ng-show="!(eventoFlag1)" id="number" type="number" max="100"  class="form-control" ng-model="votas" name="voto"> <input type="checkbox" ng-model="bandasSeleccionadas" name="bandasSeleccionadas" value="{{banda.name_band}}.{{cartelera.category}}" style="display:none" checked> </div></td>
+-->
+                                      <div class="img-holder">
+                                        <label class="switch" style="position: absolute; bottom: 410px;right: 590px;">
+                                          <input type="checkbox" ng-model="all" ng-change=changeAll()  name="all" id="all" style="display:none" checked>
+                                          <span class="slider"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 300px;right: 430px;">
+                                           <input type="checkbox" ng-model="bedroom1" ng-change=changeBedroom1() name="bedroom1" id="bedroom1" value="bedroom1" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 255px;right: 480px;">
+                                           <input type="checkbox" ng-model="bathroom" name="bathroom" ng-change=changeBathroom()  id="bathroom" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 200px;right: 430px;">
+                                           <input type="checkbox" ng-model="bedroom2" name="bedroom2" ng-change=changeBedroom2()  id="bedroom2" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 300px;right: 130px;">
+                                           <input type="checkbox" ng-model="kitchen" ng-change=changeKitchen() name="kitchen" id="kitchen" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 130px;right: 130px;">
+                                           <input type="checkbox" ng-model="mainroom" id="mainroom" ng-change=changeMainroom()+  style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                          <label class="switch" style="position: absolute; bottom: 230px;right: 240px;">
+                                         <input type="checkbox" ng-model="eatroom" ng-change=changeEatroom()  name="eatroom" id="eatroom" style="display:none" checked>
+
+                                          <span class="slider round"></span>
+                                        </label>
+                                        
+                                        <img src="/images/map1.png"  style="border-radius: 40px;">
+                                        
+                                    </div>
+                                      
+
+                                      <div style="margin: 0px 0px 0px 0px;">
+                                        <button type="submit" class="button button-block" ng-click="takePicture()" >Take Picture</button>
+                                      </div>
+                                  </form>
+                                  
+                            </div>
+                            <div id="login" >   
+                                <h1 style="color:#ffffff">Garden Pictures</h1>
+                                <form>
+                                    
+                                </form>
+                            </div>
+                    </div><!-- tab-content -->
+            </div>
+                    
+                   
+  
+</div>
