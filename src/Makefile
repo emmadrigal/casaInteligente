@@ -8,7 +8,7 @@ all: http
 
 
 http:
-		$(COMPILER) -o $(APP) $(SRC) $(LD_FLAGS) $(CFLAGS)
+		$(COMPILER) -o ../bin/$(APP) $(SRC) $(LD_FLAGS) $(CFLAGS)
 
 clean:
-	rm $(APP)
+	rm ../bin/$(APP)

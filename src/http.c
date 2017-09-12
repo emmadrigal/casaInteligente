@@ -105,9 +105,11 @@ void accept_request(int client) {
 		//TODO cambiar el estado del led correspondiente
 		printf("changing state of led E\n");
 	}
-	else if(strcmp(url, "/pic.png") == 0){
-		//TODO llamar la imagen creada por fswebcam
-		serveImage(client, "./Lenna.png");
+	else if(strcmp(url, "/pic.jpeg") == 0){
+		
+		system("fswebcam picture.jpeg");
+		
+		serveImage(client, "./picture.jpeg");
 		printf("serving image\n");
 	}
 	else{
