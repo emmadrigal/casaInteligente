@@ -3,7 +3,7 @@
 void pinMode(unsigned char pin, char MODE){
 	const char* command = "echo \"";
 	
-	const char* addressPIN = "\" > /sys/class/gpio/";
+	const char* addressPIN = "\" > /sys/class/gpio/export";
 	const char* addressMode1 = "\" > /sys/class/gpio/gpio";
 	const char* addressMode2 = "/direction";
 	
@@ -86,7 +86,7 @@ char digitalRead(unsigned char pin){
 	fp = fopen(address, "r");	
 	fscanf(fp, "%s", buff);
 	
-	return buff[0];
+	return (buff[0]-48);
 
 }
 
@@ -105,8 +105,9 @@ void blink(unsigned char pin, unsigned short freq, unsigned short duration){
 	
 	unsigned char state = 0;
 	clock_t start = clock();
+	clock_t end = clock();
 	unsigned char finished = 0;
-	while(finished){
+	while(!finished){
 		strcpy(pinCommand, command);
 		if(state){
 			strcat(pinCommand, "1");
@@ -120,8 +121,9 @@ void blink(unsigned char pin, unsigned short freq, unsigned short duration){
 		strcat(pinCommand, addressValue2);
 	
 		system(pinCommand);
-		usleep(freq);
-		finished = (clock() - start)/CLOCKS_PER_SEC > duration ? 1 : 0;
+		usleep(freq*1000);
+		end = clock();
+		finished = (end - start)/CLOCKS_PER_SEC > duration ? 1 : 0;
 	}	
 }
 
