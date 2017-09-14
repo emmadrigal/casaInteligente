@@ -69,11 +69,11 @@ void accept_request(int client) {
 		FILE *fp = fopen("leds.txt" ,"w");
 		
 		//TODO llamar los métodos de los GPIO aquí
-		char ledsA = 0;
-		char ledsB = 1;
-		char ledsC = 0;
-		char ledsD = 1;
-		char ledsE = 0;
+		char ledsA = digitalRead(14);
+		char ledsB = digitalRead(14);
+		char ledsC = digitalRead(14);
+		char ledsD = digitalRead(14);
+		char ledsE = digitalRead(14);
 		
 		char puertaA = doors[0];
 		char puertaB = doors[1];
@@ -91,31 +91,61 @@ void accept_request(int client) {
 	else if(strcmp(url, "/ledsA") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led A\n");
 	}
 	else if(strcmp(url, "/ledsB") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led B\n");
 	}
 	else if(strcmp(url, "/ledsC") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led C\n");
 	}
 	else if(strcmp(url, "/ledsD") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led D\n");
 	}
 	else if(strcmp(url, "/ledsE") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led E\n");
 	}
 	else if(strcmp(url, "/ledsF") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
+		char val = digitalRead(14);
+		if (val)
+			digitalWrite(14, 0);
+		else
+			digitalWrite(14, 1);
 		printf("changing state of led E\n");
 	}
 	else if(strcmp(url, "/pic.jpeg") == 0){
@@ -384,11 +414,11 @@ void *monitorDoors(unsigned char doors[]){
 		usleep(50);
 		
 		//TODO get data from buttons
-		doors[0] = ~doors[0];
-		doors[1] = ~doors[1];
-		doors[2] = ~doors[2];
-		doors[3] = ~doors[3];
-		doors[4] = ~doors[4];
+		doors[0] = digitalRead(14);
+		doors[1] = digitalRead(14);
+		doors[2] = digitalRead(14);
+		doors[3] = digitalRead(14);
+		doors[4] = digitalRead(14);
 		
 	}
 }
@@ -405,7 +435,17 @@ int main(void) {
 	pthread_t newthread[2];
 	
 	doors = malloc(5*sizeof(unsigned char));
-	
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0); //TODO change the pins
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);
+	pinMode(14, 0);	
 
 	int rc = pthread_create(&newthread[0] , NULL, monitorDoors, doors);
 	
