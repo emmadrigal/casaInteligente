@@ -85,6 +85,8 @@ char digitalRead(unsigned char pin){
 	
 	fp = fopen(address, "r");	
 	fscanf(fp, "%s", buff);
+
+	fclose(fp);
 	
 	return (buff[0]-48);
 

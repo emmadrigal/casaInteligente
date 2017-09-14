@@ -412,7 +412,7 @@ int startup(u_short *port) {
 
 void *monitorDoors(unsigned char doors[]){
 	while(1){
-		usleep(50);
+		usleep(50000);
 		
 		//TODO get data from buttons
 		doors[0] = digitalRead(17);
