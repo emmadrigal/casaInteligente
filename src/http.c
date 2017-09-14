@@ -12,6 +12,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
+#include <raspGPIO.h>
+
 #define ISspace(x) isspace((int)(x))
 
 #define SERVER_STRING "Server: smartHouse\n"
@@ -25,6 +27,9 @@ void not_found(int);
 void serve_file(int, const char *);
 int startup(u_short *);
 void serveImage(int, const char *);
+
+unsigned char* doors;
+
 
 /**********************************************************************/
 /* A request has caused a call to accept() on the server port to
@@ -70,10 +75,13 @@ void accept_request(int client) {
 		char ledsD = 1;
 		char ledsE = 0;
 		
-		char puertaA = 1;
-		char puertaB = 12;
+		char puertaA = doors[0];
+		char puertaB = doors[1];
+		char puertaC = doors[2];
+		char puertaD = doors[3];
+		char puertaE = doors[4];
 		
-		fprintf(fp, "{\"ledsA\": %d, \"ledsB\": %d, \"ledsC\": %d, \"ledsD\": %d, \"ledsE\": %d, \"puertaA\": %d, \"puertaB\": %d}", ledsA, ledsB, ledsC, ledsD, ledsE, puertaA, puertaB);
+		fprintf(fp, "{\"ledsA\": %d, \"ledsB\": %d, \"ledsC\": %d, \"ledsD\": %d, \"ledsE\": %d, \"puertaA\": %d, \"puertaB\": %d, \"puertaC\": %d, \"puertaD\": %d, \"puertaE\": %d}", ledsA, ledsB, ledsC, ledsD, ledsE, puertaA, puertaB, puertaC, puertaD, puertaE);
 		fclose(fp);
 		
 	
@@ -101,6 +109,11 @@ void accept_request(int client) {
 		printf("changing state of led D\n");
 	}
 	else if(strcmp(url, "/ledsE") == 0){
+		okHeaders(client);
+		//TODO cambiar el estado del led correspondiente
+		printf("changing state of led E\n");
+	}
+	else if(strcmp(url, "/ledsF") == 0){
 		okHeaders(client);
 		//TODO cambiar el estado del led correspondiente
 		printf("changing state of led E\n");
@@ -366,6 +379,21 @@ int startup(u_short *port) {
 }
 
 
+void *monitorDoors(unsigned char doors[]){
+	while(1){
+		usleep(50);
+		
+		//TODO get data from buttons
+		doors[0] = ~doors[0];
+		doors[1] = ~doors[1];
+		doors[2] = ~doors[2];
+		doors[3] = ~doors[3];
+		doors[4] = ~doors[4];
+		
+	}
+}
+
+
 /**********************************************************************/
 
 int main(void) {
@@ -374,8 +402,13 @@ int main(void) {
 	int client_sock = -1;
 	struct sockaddr_in client_name;
 	int client_name_len = sizeof(client_name);
-	pthread_t newthread;
+	pthread_t newthread[2];
+	
+	doors = malloc(5*sizeof(unsigned char));
+	
 
+	int rc = pthread_create(&newthread[0] , NULL, monitorDoors, doors);
+	
 	server_sock = startup(&port);
 	printf("httpd running on port %d\n", port);
 
@@ -387,7 +420,7 @@ int main(void) {
 		if (client_sock == -1)
 			error_die("accept");
 		/* accept_request(client_sock); */
-		if (pthread_create(&newthread , NULL, accept_request, client_sock) != 0)
+		if (pthread_create(&newthread[0] , NULL, accept_request, client_sock) != 0)
 			perror("pthread_create");
 	}
 

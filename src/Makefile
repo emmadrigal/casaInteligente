@@ -1,7 +1,8 @@
 APP=http
 SRC = $(APP).c
 COMPILER=$(CC)
-LD_FLAGS= -pthread
+LIB=raspGPIO
+LD_FLAGS= -pthread -I../include -L../lib -l$(LIB)
 CFLAGS = -W
 
 all: http

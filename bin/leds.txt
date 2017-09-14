@@ -1,0 +1,1 @@
+{"ledsA": 0, "ledsB": 1, "ledsC": 0, "ledsD": 1, "ledsE": 0, "puertaA": 0, "puertaB": 0, "puertaC": 0, "puertaD": 0, "puertaE": 0}
