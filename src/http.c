@@ -27,8 +27,16 @@ void not_found(int);
 void serve_file(int, const char *);
 int startup(u_short *);
 void serveImage(int, const char *);
+void okHeaders(int );
 
 unsigned char* doors;
+
+unsigned char ledA = 0;
+unsigned char ledB = 0;
+unsigned char ledC = 0;
+unsigned char ledD = 0;
+unsigned char ledE = 0;
+unsigned char ledF = 0;
 
 
 /**********************************************************************/
@@ -68,21 +76,14 @@ void accept_request(int client) {
 	if(strcmp(url, "/info") == 0){
 		FILE *fp = fopen("leds.txt" ,"w");
 		
-		//TODO llamar los métodos de los GPIO aquí
-		char ledsA = digitalRead(14);
-		char ledsB = digitalRead(15);
-		char ledsC = digitalRead(18);
-		char ledsD = digitalRead(2);
-		char ledsE = digitalRead(3);
-		char ledsF = digitalRead(4);
-		
 		char puertaA = doors[0];
 		char puertaB = doors[1];
 		char puertaC = doors[2];
 		char puertaD = doors[3];
 		char puertaE = doors[4];
 		
-		fprintf(fp, "{\"ledsA\": %d, \"ledsB\": %d, \"ledsC\": %d, \"ledsD\": %d, \"ledsE\": %d, \"puertaA\": %d, \"puertaB\": %d, \"puertaC\": %d, \"puertaD\": %d, \"puertaE\": %d}", ledsA, ledsB, ledsC, ledsD, ledsE, puertaA, puertaB, puertaC, puertaD, puertaE);
+		
+		fprintf(fp, "{\"ledsA\": %d, \"ledsB\": %d, \"ledsC\": %d, \"ledsD\": %d, \"ledsE\": %d, \"ledsF\": %d, \"puertaA\": %d, \"puertaB\": %d, \"puertaC\": %d, \"puertaD\": %d, \"puertaE\": %d}", ledA, ledB, ledC, ledD, ledE, ledF, puertaA, puertaB, puertaC, puertaD, puertaE);
 		fclose(fp);
 		
 	
@@ -91,63 +92,67 @@ void accept_request(int client) {
 	}
 	else if(strcmp(url, "/ledsA") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(14);
-		if (val)
+		
+		printf("changing state of led A\n");
+		if (ledA)
 			digitalWrite(14, 0);
 		else
 			digitalWrite(14, 1);
-		printf("changing state of led A\n");
+		
+		ledA = ledA^1;
 	}
 	else if(strcmp(url, "/ledsB") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(15);
-		if (val)
+
+		printf("changing state of led B\n");
+		if (ledB)
 			digitalWrite(15, 0);
 		else
 			digitalWrite(15, 1);
-		printf("changing state of led B\n");
+		
+		ledB = ledB^1;
 	}
 	else if(strcmp(url, "/ledsC") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(18);
-		if (val)
+
+		printf("changing state of led C\n");
+		if (ledC)
 			digitalWrite(18, 0);
 		else
 			digitalWrite(18, 1);
-		printf("changing state of led C\n");
+		
+		ledC = ledC^1;		
 	}
 	else if(strcmp(url, "/ledsD") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(2);
-		if (val)
+
+		printf("changing state of led D\n");
+		if (ledD)
 			digitalWrite(2, 0);
 		else
 			digitalWrite(2, 1);
-		printf("changing state of led D\n");
+		ledD = ledD^1;
 	}
 	else if(strcmp(url, "/ledsE") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(14);
-		if (val)
+
+		printf("changing state of led E\n");
+		if (ledE)
 			digitalWrite(3, 0);
 		else
 			digitalWrite(3, 1);
-		printf("changing state of led E\n");
+		ledE = ledE^1;
 	}
 	else if(strcmp(url, "/ledsF") == 0){
 		okHeaders(client);
-		//TODO cambiar el estado del led correspondiente
-		char val = digitalRead(4);
-		if (val)
+
+		printf("changing state of led F\n");
+		if (ledF)
 			digitalWrite(4, 0);
 		else
 			digitalWrite(4, 1);
-		printf("changing state of led E\n");
+		
+		ledF = ledF^1;
 	}
 	else if(strcmp(url, "/pic.jpeg") == 0){
 		
@@ -414,7 +419,6 @@ void *monitorDoors(unsigned char doors[]){
 	while(1){
 		usleep(50000);
 		
-		//TODO get data from buttons
 		doors[0] = digitalRead(17);
 		doors[1] = digitalRead(27);
 		doors[2] = digitalRead(22);
@@ -436,17 +440,26 @@ int main(void) {
 	pthread_t newthread[2];
 	
 	doors = malloc(5*sizeof(unsigned char));
-	pinMode(14, 0);
-	pinMode(15, 0);
-	pinMode(18, 0);
-	pinMode(2, 0); //TODO change the pins
-	pinMode(3, 0);
-	pinMode(4, 0);
-	pinMode(17, 0);
-	pinMode(27, 0);
-	pinMode(22, 0);
-	pinMode(23, 0);
-	pinMode(24, 0);	
+	pinMode(14, 0);//Led A
+	pinMode(15, 0);//Led B
+	pinMode(18, 0);//Led C
+	pinMode(2, 0); //Led D
+	pinMode(3, 0); //Led E
+	pinMode(4, 0); //Led F
+	
+	pinMode(17, 1);//Door A
+	pinMode(27, 1);//Door B
+	pinMode(22, 1);//Door C
+	pinMode(23, 1);//Door D
+	pinMode(24, 1);//Door E
+	
+
+	digitalWrite(14, 0);
+	digitalWrite(15, 0);
+	digitalWrite(18, 0);
+	digitalWrite(2, 0);
+	digitalWrite(3, 0);
+	digitalWrite(4, 0);
 
 	int rc = pthread_create(&newthread[0] , NULL, monitorDoors, doors);
 	
