@@ -1,5 +1,4 @@
 <div ng-controller="fanaticoController">
-
    <div class="form">
                     <h1 style="color:#ffffff" >Smart House</h1>  
                     <hr>
@@ -10,11 +9,7 @@
                     <div class="tab-content">
                                 <div id="signup">   
                                   <h1 style="color:#ffffff">Your House</h1>
-                                  <form>
-                                      
-                                      <!-- 
-                                                                            <td><div class="col-xs-3"><input ng-show="!(eventoFlag1)" id="number" type="number" max="100"  class="form-control" ng-model="votas" name="voto"> <input type="checkbox" ng-model="bandasSeleccionadas" name="bandasSeleccionadas" value="{{banda.name_band}}.{{cartelera.category}}" style="display:none" checked> </div></td>
--->
+                                  <form style="position: relative;" >
                                       <div class="img-holder">
                                         <label class="switch" style="position: absolute; bottom: 410px;right: 590px;">
                                           <input type="checkbox" ng-model="all" ng-change=changeAll()  name="all" id="all" style="display:none" checked>
@@ -37,7 +32,7 @@
                                           <span class="slider round"></span>
                                         </label>
                                         <label class="switch" style="position: absolute; bottom: 130px;right: 130px;">
-                                           <input type="checkbox" ng-model="mainroom" id="mainroom" ng-change=changeMainroom()+  style="display:none" checked>
+                                           <input type="checkbox" ng-model="mainroom" id="mainroom" ng-change=changeMainRoom()  style="display:none" checked>
                                           <span class="slider round"></span>
                                         </label>
                                           <label class="switch" style="position: absolute; bottom: 230px;right: 240px;">
@@ -45,14 +40,29 @@
 
                                           <span class="slider round"></span>
                                         </label>
-                                        
-                                        <img src="/images/map1.png"  style="border-radius: 40px;">
+                                          
+                                        <img src="/images/lock.png" id="lock1"  style="position: absolute; bottom: 290px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock2"  style="position: absolute; bottom: 220px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock3"  style="position: absolute; bottom: 250px;right: 420px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock4"  style="position: absolute; bottom: 280px;right: 220px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock5"  style="position: absolute; bottom: 170px;right: 290px; width:50px;height:50px;">
+                                          
+                                        <img src="/images/unlock.png" id="unlock1"  style="position: absolute; bottom: 290px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock2"  style="position: absolute; bottom: 220px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock3"  style="position: absolute; bottom: 250px;right: 420px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock4"  style="position: absolute; bottom: 280px;right: 220px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock5"  style="position: absolute; bottom: 170px;right: 290px; width:50px;height:50px;">
+                                          
+                                        <img src="/images/map1.png" id="mapImage"  style="border-radius: 40px;">
+                                          
+
                                         
                                     </div>
                                       
 
                                       <div style="margin: 0px 0px 0px 0px;">
                                         <button type="submit" class="button button-block" ng-click="takePicture()" >Take Picture</button>
+                                        <img src={{datos.foto}}>
                                       </div>
                                   </form>
                                   
@@ -60,6 +70,9 @@
                             <div id="login" >   
                                 <h1 style="color:#ffffff">Garden Pictures</h1>
                                 <form>
+                                    <div id='galeria'>
+                                        
+                                    </div>
                                     
                                 </form>
                             </div>
@@ -69,3 +82,4 @@
                    
   
 </div>
+

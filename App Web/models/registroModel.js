@@ -9,6 +9,10 @@ this.verificarUsuario = function(usuarioLogin){
                         "password":usuarioLogin.password
                         };
     console.log(Credenciales);
+    var encrypt=CryptoJS.MD5(usuarioLogin.password);
+    var aaaa= CryptoJS.MD5("aaaaaaaaaaaaaaaaa");
+    console.log(encrypt.toString);
+    console.log(aaaa);
     $http({
     method: 'POST',
     url: myURL+"/api/login",
