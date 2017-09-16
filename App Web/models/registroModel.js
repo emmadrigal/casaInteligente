@@ -1,4 +1,4 @@
-myConcert.service("registroModel", function($routeParams, $location, $http){
+myHouse.service("registroModel", function($routeParams, $location, $http){
 var myURL = localStorage.getItem("url");
 
     
@@ -10,24 +10,9 @@ this.verificarUsuario = function(usuarioLogin){
                         };
     console.log(Credenciales);
     var encrypt=CryptoJS.MD5(usuarioLogin.password);
-    var aaaa= CryptoJS.MD5("aaaaaaaaaaaaaaaaa");
     console.log(encrypt.toString);
-    console.log(aaaa);
-    $http({
-    method: 'POST',
-    url: myURL+"/api/login",
-    headers: {'Content-Type' : 'application/json'},
-    data: Credenciales
-    }).then(function(result){
-            if (result.data.success) {
-                      window.location.href = "#vistaFanatico";
-                  
-                }
-        
-            else alert(result.data.detail+ "Contaseña Incorrecta" )
-    }, function(error) {
-        console.log(error);
-    });
+    window.location.href = "#smartHouse"
+   
 }
 
 
@@ -36,7 +21,6 @@ this.verificarUsuario = function(usuarioLogin){
 this.crearUsuario = function (usuario) {
     var UsuarioACrear;
         UsuarioACrear = {
-                    "role":              "fanatico",
                     "user_data":
                            {   
                             "username":          usuario.nombreUsuario,
@@ -45,24 +29,8 @@ this.crearUsuario = function (usuario) {
 
                     };
         console.log(UsuarioACrear);
-        window.location.href = "#vistaFanatico";
-        $http({
-                method: 'POST',
-                url: myURL+"/API/Usuarios",
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                data: UsuarioACrear
-                }).then(function(result){
-                    if (result.data.success){
-                        alert("Usuario Creado");
-                            window.location.href = "#vistaFanatico";
-                        }
+        window.location.href = "#smartHouse";
 
-                    else {alert(result.data.detail);}
-                    }, function(error) {
-                    console.log(error);
-                });
         }
         
 

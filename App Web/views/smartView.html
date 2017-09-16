@@ -1,0 +1,85 @@
+<div ng-controller="smartController">
+   <div class="form">
+                    <h1 style="color:#ffffff" >Smart House</h1>  
+                    <hr>
+                    <ul class="tab-group">
+                        <li class="tab active"><a href="#signup" >Control</a></li>
+                        <li class="tab"><a href="#login" >Pictures</a></li>
+                    </ul>
+                    <div class="tab-content">
+                                <div id="signup">   
+                                  <h1 style="color:#ffffff">Your House</h1>
+                                  <form style="position: relative;" >
+                                      <div class="img-holder">
+                                        <label class="switch" style="position: absolute; bottom: 410px;right: 590px;">
+                                          <input type="checkbox" ng-model="all" ng-change=changeAll()  name="all" id="all" style="display:none" checked>
+                                          <span class="slider"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 300px;right: 430px;">
+                                           <input type="checkbox" ng-model="bedroom1" ng-change=changeBedroom1() name="bedroom1" id="bedroom1" value="bedroom1" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 255px;right: 480px;">
+                                           <input type="checkbox" ng-model="bathroom" name="bathroom" ng-change=changeBathroom()  id="bathroom" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 200px;right: 430px;">
+                                           <input type="checkbox" ng-model="bedroom2" name="bedroom2" ng-change=changeBedroom2()  id="bedroom2" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 300px;right: 130px;">
+                                           <input type="checkbox" ng-model="kitchen" ng-change=changeKitchen() name="kitchen" id="kitchen" style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                        <label class="switch" style="position: absolute; bottom: 130px;right: 130px;">
+                                           <input type="checkbox" ng-model="mainroom" id="mainroom" ng-change=changeMainRoom()  style="display:none" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                          <label class="switch" style="position: absolute; bottom: 230px;right: 240px;">
+                                         <input type="checkbox" ng-model="eatroom" ng-change=changeEatroom()  name="eatroom" id="eatroom" style="display:none" checked>
+
+                                          <span class="slider round"></span>
+                                        </label>
+                                          
+                                        <img src="/images/lock.png" id="lock1"  style="position: absolute; bottom: 290px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock2"  style="position: absolute; bottom: 220px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock3"  style="position: absolute; bottom: 250px;right: 420px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock4"  style="position: absolute; bottom: 280px;right: 220px; width:50px;height:50px;">
+                                        <img src="/images/lock.png" id="lock5"  style="position: absolute; bottom: 170px;right: 290px; width:50px;height:50px;">
+                                          
+                                        <img src="/images/unlock.png" id="unlock1"  style="position: absolute; bottom: 290px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock2"  style="position: absolute; bottom: 220px;right: 350px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock3"  style="position: absolute; bottom: 250px;right: 420px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock4"  style="position: absolute; bottom: 280px;right: 220px; width:50px;height:50px;">
+                                        <img src="/images/unlock.png" id="unlock5"  style="position: absolute; bottom: 170px;right: 290px; width:50px;height:50px;">
+                                          
+                                        <img src="/images/map1.png" id="mapImage"  style="border-radius: 40px;">
+                                          
+
+                                        
+                                    </div>
+                                      
+
+                                      <div style="margin: 0px 0px 0px 0px;">
+                                        <button type="submit" class="button button-block" ng-click="takePicture()" >Take Picture</button>
+                                        <img src={{datos.foto}}>
+                                      </div>
+                                  </form>
+                                  
+                            </div>
+                            <div id="login" >   
+                                <h1 style="color:#ffffff">Garden Pictures</h1>
+                                <form>
+                                    <div id='galeria'>
+                                        
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                    </div><!-- tab-content -->
+            </div>
+                    
+                   
+  
+</div>
+

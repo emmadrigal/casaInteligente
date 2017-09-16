@@ -1,4 +1,4 @@
-myConcert.controller("registroController", function($scope, $http, registroModel){
+myHouse.controller("registroController", function($scope, $http, registroModel){
 
     $scope.usuario              = {};
     $scope.usuarioLogin         = {};

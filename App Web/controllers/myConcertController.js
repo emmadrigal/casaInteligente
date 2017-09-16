@@ -1,3 +1,4 @@
-myConcert.controller("myConcertController", function($scope,  $http, myConcertModel,$ce){
+myHouse.controller("myConcertController", function($scope,  $http, myConcertModel,$ce){
+    window.location.href = "#smartHouse";
 	
 });
